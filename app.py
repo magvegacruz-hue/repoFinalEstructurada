@@ -22,6 +22,7 @@ from logica.gestorDatos import (
     obtener_actividades,
     obtener_actividades_disponibles,
     buscar_actividad_por_id,
+    buscar_solicitud_por_id,
     crear_actividad,
     editar_actividad,
     eliminar_actividad,
