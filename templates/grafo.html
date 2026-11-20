@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Grafo de relaciones</h5>
+    <p class="text-muted">
+      Relaciones entre estudiantes, actividades y beneficios solicitados.
+    </p>
+
+    {% if grafo %}
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Nodo origen</th>
+              <th>Relación</th>
+              <th>Nodo destino</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for origen, conexiones in grafo.items() %}
+              {% for conexion in conexiones %}
+                <tr>
+                  <td>{{ origen }}</td>
+                  <td>{{ conexion.relacion }}</td>
+                  <td>{{ conexion.destino }}</td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="mb-0">Aún no hay relaciones registradas en el grafo.</p>
+    {% endif %}
+  </div>
+</div>
+
+<a class="btn btn-secondary" href="{{ url_for('panel_admin') }}">
+  Volver al panel
+</a>
+{% endblock %}

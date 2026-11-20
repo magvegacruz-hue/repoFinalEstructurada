@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Solicitudes pendientes</h5>
+    <p class="text-muted">
+      Revisa las solicitudes en orden de llegada y convalida aquellas que cumplan los requisitos.
+    </p>
+
+    <form method="get" action="{{ url_for('solicitudes_pendientes_ruta') }}" class="row g-2 mb-3">
+      <div class="col-md-4">
+        <select name="criterio" class="form-select">
+          <option value="fecha_solicitud"
+            {% if criterio == "fecha_solicitud" %}selected{% endif %}>
+            Ordenar por fecha de solicitud
+          </option>
+
+          <option value="horas_solicitadas"
+            {% if criterio == "horas_solicitadas" %}selected{% endif %}>
+            Ordenar por horas solicitadas
+          </option>
+
+          <option value="nombre_estudiante"
+            {% if criterio == "nombre_estudiante" %}selected{% endif %}>
+            Ordenar por nombre del estudiante
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <button class="btn btn-primary w-100">Ordenar</button>
+      </div>
+    </form>
+
+    {% if solicitudes %}
+      <div class="table-responsive">
+        <table class="table table-striped align-middle">
+          <thead>
+            <tr>
+              <th>Estudiante</th>
+              <th>CIF</th>
+              <th>Actividad</th>
+              <th>Beneficio</th>
+              <th>Horas</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for solicitud in solicitudes %}
+              <tr>
+                <td>{{ solicitud.nombre_estudiante }}</td>
+                <td>{{ solicitud.cif }}</td>
+                <td>{{ solicitud.nombre_actividad }}</td>
+                <td>{{ solicitud.beneficio_solicitado }}</td>
+                <td>{{ solicitud.horas_solicitadas }}</td>
+                <td>{{ solicitud.fecha_solicitud }}</td>
+
+                <td>
+                  <a class="btn btn-sm btn-success"
+                     href="{{ url_for('convalidar_solicitud_ruta', id_solicitud=solicitud.id_solicitud) }}">
+                    Convalidar
+                  </a>
+
+                  <a class="btn btn-sm btn-danger"
+                     href="{{ url_for('rechazar_solicitud_ruta', id_solicitud=solicitud.id_solicitud) }}">
+                    Rechazar
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="mb-0">No hay solicitudes pendientes.</p>
+    {% endif %}
+  </div>
+</div>
+
+<a class="btn btn-secondary" href="{{ url_for('panel_admin') }}">
+  Volver al panel
+</a>
+{% endblock %}

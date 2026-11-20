@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ actividad.nombre }}</h5>
+    <p class="text-muted">{{ actividad.descripcion }}</p>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p class="mb-1">
+          <strong>Fecha:</strong> {{ actividad.fecha }}<br>
+          <strong>Hora:</strong> {{ actividad.hora_inicio }} - {{ actividad.hora_fin }}<br>
+          <strong>Lugar:</strong> {{ actividad.lugar }}
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <p class="mb-1">
+          <strong>Beneficio:</strong> {{ actividad.beneficio }}<br>
+
+          {% if actividad.beneficio == "Horas laborales" %}
+            <strong>Horas convalidables:</strong>
+            {{ actividad.horas_convalidables }}
+          {% endif %}
+        </p>
+      </div>
+    </div>
+
+    <a class="btn btn-primary"
+       href="{{ url_for('registrar_solicitud_ruta', id_actividad=actividad.id) }}">
+      Solicitar convalidación
+    </a>
+
+    <a class="btn btn-secondary" href="{{ url_for('inicio') }}">
+      Volver
+    </a>
+  </div>
+</div>
+{% endblock %}

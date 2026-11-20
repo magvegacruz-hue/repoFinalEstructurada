@@ -17,8 +17,8 @@ import io
 import csv
 
 # Importa las funciones de lógica y estructuras de datos.
-from logica.gestor_datos import inicializar_sistema
-from logica.gestor_datos import (
+from logica.gestorDatos import inicializar_sistema
+from logica.gestorDatos import (
     obtener_actividades,
     obtener_actividades_disponibles,
     buscar_actividad_por_id,
@@ -54,6 +54,33 @@ datos = inicializar_sistema()
 # Verifica si el usuario actual es el administrador.
 def administrador_autenticado():
     return session.get("rol") == "administrador"
+
+
+# Calcula los indicadores principales para el panel de Vida Estudiantil.
+def obtener_estadisticas():
+    solicitudes = datos["solicitudes"]["solicitudes"]
+
+    pendientes = 0
+    convalidadas = 0
+    rechazadas = 0
+
+    # Recorre todas las solicitudes y cuenta cada estado.
+    for solicitud in solicitudes:
+        if solicitud["estado"] == "Pendiente":
+            pendientes += 1
+
+        if solicitud["estado"] == "Convalidado":
+            convalidadas += 1
+
+        if solicitud["estado"] == "Rechazado":
+            rechazadas += 1
+
+    return {
+        "pendientes": pendientes,
+        "convalidadas": convalidadas,
+        "rechazadas": rechazadas,
+        "total_actividades": len(datos["actividades"]["actividades"])
+    }
 
 
 # Página principal para los estudiantes.
@@ -97,11 +124,13 @@ def panel_admin():
 
     actividades = obtener_actividades(datos)
     solicitudes = obtener_solicitudes_pendientes(datos)
+    estadisticas = obtener_estadisticas()
 
     return render_template(
         "panel_admin.html",
         actividades=actividades,
-        solicitudes_pendientes=solicitudes
+        solicitudes_pendientes=solicitudes,
+        estadisticas=estadisticas
     )
 
 
@@ -170,7 +199,7 @@ def solicitudes_pendientes_ruta():
     if not administrador_autenticado():
         return redirect(url_for("login_admin"))
 
-    # Permite ordenar por fecha o por horas solicitadas.
+    # Permite ordenar por fecha, horas o nombre del estudiante.
     criterio = request.args.get("criterio", "fecha_solicitud")
     solicitudes = obtener_solicitudes_pendientes(datos)
 

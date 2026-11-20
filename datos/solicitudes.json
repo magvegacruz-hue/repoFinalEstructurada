@@ -1,0 +1,20 @@
+{
+    "solicitudes": [
+        {
+            "id_solicitud": "SOL-FDB7791B",
+            "cif": "25010776",
+            "nombre_estudiante": "Miguel Angel Gonzalez Vegacruz",
+            "facultad": "FCAE",
+            "carrera": "Economia Empresarial",
+            "tipo_beca": "Academica",
+            "correo": "magvegacruz@uamv.edu.ni",
+            "id_actividad": "ACT-D9833213",
+            "nombre_actividad": "Reinado uam",
+            "beneficio_solicitado": "Horas laborales",
+            "horas_solicitadas": 15,
+            "fecha_solicitud": "2026-11-19 21:11:04",
+            "estado": "Convalidado",
+            "observacion": ""
+        }
+    ]
+}

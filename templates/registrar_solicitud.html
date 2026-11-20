@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Solicitar convalidación</h5>
+    <p class="text-muted">
+      Actividad: <strong>{{ actividad.nombre }}</strong><br>
+      Beneficio: <strong>{{ actividad.beneficio }}</strong>
+    </p>
+
+    {% if actividad.beneficio == "Horas laborales" %}
+      <p>
+        Horas convalidables:
+        <strong>{{ actividad.horas_convalidables }}</strong>
+      </p>
+    {% endif %}
+
+    <form method="post"
+          action="{{ url_for('registrar_solicitud_ruta', id_actividad=actividad.id) }}"
+          class="row g-3">
+
+      <div class="col-md-6">
+        <label class="form-label">CIF</label>
+        <input name="cif" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Nombre completo</label>
+        <input name="nombre" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Facultad</label>
+        <input name="facultad" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Carrera</label>
+        <input name="carrera" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Tipo de beca</label>
+        <input name="tipo_beca" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Correo institucional</label>
+        <input type="email" name="correo" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Beneficio a solicitar</label>
+        <select name="beneficio_solicitado" class="form-select" required>
+          <option value="">Selecciona un beneficio</option>
+          <option value="Horas laborales">Horas laborales</option>
+          <option value="Crédito deportivo">Crédito deportivo</option>
+          <option value="Crédito social">Crédito social</option>
+          <option value="Crédito cultural">Crédito cultural</option>
+        </select>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary w-100">Enviar solicitud</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

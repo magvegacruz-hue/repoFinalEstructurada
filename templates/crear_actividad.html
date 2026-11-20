@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Registrar nueva actividad</h5>
+    <p class="text-muted">
+      Completa la información de la actividad que será publicada para los estudiantes.
+    </p>
+
+    <form method="post" action="{{ url_for('crear_actividad_ruta') }}" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Nombre de la actividad</label>
+        <input name="nombre" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Lugar</label>
+        <input name="lugar" class="form-control" required>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Descripción</label>
+        <textarea name="descripcion" class="form-control" rows="3"></textarea>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Fecha</label>
+        <input type="date" name="fecha" class="form-control" required>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Hora de inicio</label>
+        <input type="time" name="hora_inicio" class="form-control" required>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Hora de fin</label>
+        <input type="time" name="hora_fin" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Beneficio</label>
+        <select name="beneficio" class="form-select" required>
+          <option value="">Selecciona un beneficio</option>
+          <option value="Horas laborales">Horas laborales</option>
+          <option value="Crédito deportivo">Crédito deportivo</option>
+          <option value="Crédito social">Crédito social</option>
+          <option value="Crédito cultural">Crédito cultural</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Horas convalidables</label>
+        <input type="number" name="horas_convalidables" class="form-control" min="0" value="0">
+        <div class="form-text">
+          Solo aplica cuando el beneficio sea “Horas laborales”.
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary w-100">Registrar actividad</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<a class="btn btn-secondary mt-3" href="{{ url_for('panel_admin') }}">
+  Volver al panel
+</a>
+{% endblock %}

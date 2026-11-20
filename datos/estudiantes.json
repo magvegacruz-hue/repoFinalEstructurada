@@ -1,0 +1,12 @@
+{
+    "estudiantes": [
+        {
+            "cif": "25010776",
+            "nombre": "Miguel Angel Gonzalez Vegacruz",
+            "facultad": "FCAE",
+            "carrera": "Economia Empresarial",
+            "tipo_beca": "Academica",
+            "correo": "magvegacruz@uamv.edu.ni"
+        }
+    ]
+}

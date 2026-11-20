@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Actividades</h5>
+        <p class="display-6 mb-0">{{ estadisticas.total_actividades }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Pendientes</h5>
+        <p class="display-6 mb-0">{{ estadisticas.pendientes }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Convalidadas</h5>
+        <p class="display-6 mb-0">{{ estadisticas.convalidadas }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Rechazadas</h5>
+        <p class="display-6 mb-0">{{ estadisticas.rechazadas }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex flex-wrap gap-2 mb-4">
+  <a class="btn btn-primary" href="{{ url_for('crear_actividad_ruta') }}">
+    Crear actividad
+  </a>
+
+  <a class="btn btn-success" href="{{ url_for('solicitudes_pendientes_ruta') }}">
+    Solicitudes pendientes
+  </a>
+
+  <a class="btn btn-secondary" href="{{ url_for('reportes_ruta') }}">
+    Reportes
+  </a>
+
+  <a class="btn btn-dark" href="{{ url_for('grafo_ruta') }}">
+    Ver grafo
+  </a>
+</div>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Actividades registradas</h5>
+
+    {% if actividades %}
+      <div class="table-responsive">
+        <table class="table table-striped align-middle">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Lugar</th>
+              <th>Beneficio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for actividad in actividades %}
+              <tr>
+                <td>{{ actividad.nombre }}</td>
+                <td>{{ actividad.fecha }}</td>
+                <td>{{ actividad.hora_inicio }} - {{ actividad.hora_fin }}</td>
+                <td>{{ actividad.lugar }}</td>
+                <td>{{ actividad.beneficio }}</td>
+
+                <td>
+                  <a class="btn btn-sm btn-warning"
+                     href="{{ url_for('editar_actividad_ruta', id_actividad=actividad.id) }}">
+                    Editar
+                  </a>
+
+                  <a class="btn btn-sm btn-danger"
+                     href="{{ url_for('eliminar_actividad_ruta', id_actividad=actividad.id) }}">
+                    Eliminar
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="mb-0">No hay actividades registradas.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

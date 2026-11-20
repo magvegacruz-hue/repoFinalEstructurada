@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center mb-3">Vida Estudiantil</h5>
+
+        <p class="text-muted text-center">
+          Ingresa tus credenciales para administrar actividades y solicitudes.
+        </p>
+
+        <form method="post" action="{{ url_for('login_admin') }}">
+          <div class="mb-3">
+            <label class="form-label">Usuario</label>
+            <input name="usuario" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input type="password" name="contrasena" class="form-control" required>
+          </div>
+
+          <button class="btn btn-primary w-100">Iniciar sesión</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

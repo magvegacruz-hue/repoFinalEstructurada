@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Rechazar solicitud</h5>
+
+    {% if solicitud %}
+      <p class="text-muted">
+        Estudiante: <strong>{{ solicitud.nombre_estudiante }}</strong><br>
+        CIF: <strong>{{ solicitud.cif }}</strong><br>
+        Actividad: <strong>{{ solicitud.nombre_actividad }}</strong><br>
+        Beneficio: <strong>{{ solicitud.beneficio_solicitado }}</strong>
+      </p>
+
+      <form method="post"
+            action="{{ url_for('rechazar_solicitud_ruta', id_solicitud=solicitud.id_solicitud) }}">
+
+        <div class="mb-3">
+          <label class="form-label">Motivo del rechazo</label>
+          <textarea name="observacion" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <button class="btn btn-danger">Rechazar solicitud</button>
+        <a class="btn btn-secondary" href="{{ url_for('solicitudes_pendientes_ruta') }}">
+          Cancelar
+        </a>
+      </form>
+    {% else %}
+      <p class="mb-0">La solicitud no existe.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

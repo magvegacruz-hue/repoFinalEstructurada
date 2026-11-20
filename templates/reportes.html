@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Solicitudes pendientes</h5>
+        <p class="display-6 mb-0">{{ reportes.pendientes }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Solicitudes convalidadas</h5>
+        <p class="display-6 mb-0">{{ reportes.convalidadas }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Solicitudes rechazadas</h5>
+        <p class="display-6 mb-0">{{ reportes.rechazadas }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Horas laborales convalidadas</h5>
+        <p class="display-6 mb-0">{{ reportes.horas_totales }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Actividades registradas</h5>
+        <p class="display-6 mb-0">{{ reportes.total_actividades }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a class="btn btn-secondary" href="{{ url_for('panel_admin') }}">
+  Volver al panel
+</a>
+{% endblock %}

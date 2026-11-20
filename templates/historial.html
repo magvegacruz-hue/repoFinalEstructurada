@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Historial de solicitudes</h5>
+
+    <form method="get" action="{{ url_for('historial_ruta') }}" class="row g-2">
+      <div class="col-md-4">
+        <input name="cif" class="form-control" placeholder="CIF"
+               value="{{ cif }}" required>
+      </div>
+
+      <div class="col-md-3">
+        <select name="estado" class="form-select">
+          <option value="">Todos los estados</option>
+
+          <option value="Pendiente"
+            {% if estado == "Pendiente" %}selected{% endif %}>
+            Pendiente
+          </option>
+
+          <option value="Convalidado"
+            {% if estado == "Convalidado" %}selected{% endif %}>
+            Convalidado
+          </option>
+
+          <option value="Rechazado"
+            {% if estado == "Rechazado" %}selected{% endif %}>
+            Rechazado
+          </option>
+
+          <option value="Evento eliminado"
+            {% if estado == "Evento eliminado" %}selected{% endif %}>
+            Evento eliminado
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <select name="beneficio" class="form-select">
+          <option value="">Todos los beneficios</option>
+          <option value="Horas laborales">Horas laborales</option>
+          <option value="Crédito deportivo">Crédito deportivo</option>
+          <option value="Crédito social">Crédito social</option>
+          <option value="Crédito cultural">Crédito cultural</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100">Filtrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-6">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title mb-0">Horas laborales convalidadas</h5>
+        <p class="display-6 mb-0">{{ horas_convalidadas }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Créditos convalidados</h5>
+
+        <p class="mb-1">
+          <strong>Deportivos:</strong> {{ creditos["Crédito deportivo"] }}<br>
+          <strong>Sociales:</strong> {{ creditos["Crédito social"] }}<br>
+          <strong>Culturales:</strong> {{ creditos["Crédito cultural"] }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Solicitudes</h5>
+
+    {% if solicitudes %}
+      <div class="table-responsive">
+        <table class="table table-striped align-middle">
+          <thead>
+            <tr>
+              <th>Actividad</th>
+              <th>Beneficio</th>
+              <th>Horas</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Observación</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for solicitud in solicitudes %}
+              <tr>
+                <td>{{ solicitud.nombre_actividad }}</td>
+                <td>{{ solicitud.beneficio_solicitado }}</td>
+                <td>{{ solicitud.horas_solicitadas }}</td>
+                <td>{{ solicitud.fecha_solicitud }}</td>
+
+                <td>
+                  {% if solicitud.estado == "Convalidado" %}
+                    <span class="badge bg-success">{{ solicitud.estado }}</span>
+
+                  {% elif solicitud.estado == "Rechazado" %}
+                    <span class="badge bg-danger">{{ solicitud.estado }}</span>
+
+                  {% elif solicitud.estado == "Evento eliminado" %}
+                    <span class="badge bg-secondary">{{ solicitud.estado }}</span>
+
+                  {% else %}
+                    <span class="badge bg-warning text-dark">{{ solicitud.estado }}</span>
+                  {% endif %}
+                </td>
+
+                <td>{{ solicitud.observacion }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="mb-0">No se encontraron solicitudes para este CIF.</p>
+    {% endif %}
+  </div>
+</div>
+
+<a class="btn btn-success"
+   href="{{ url_for('descargar_historial_ruta', cif=cif) }}">
+  Descargar historial
+</a>
+{% endblock %}

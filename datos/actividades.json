@@ -1,0 +1,16 @@
+{
+    "actividades": [
+        {
+            "id": "ACT-D9833213",
+            "nombre": "Reinado uam",
+            "descripcion": "Reinado UAM",
+            "fecha": "2026-11-20",
+            "hora_inicio": "13:10",
+            "hora_fin": "14:00",
+            "lugar": "plazoleta principal",
+            "beneficio": "Horas laborales",
+            "horas_convalidables": 15,
+            "estado": "Disponible"
+        }
+    ]
+}
