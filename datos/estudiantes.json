@@ -7,6 +7,14 @@
             "carrera": "Economia Empresarial",
             "tipo_beca": "Academica",
             "correo": "magvegacruz@uamv.edu.ni"
+        },
+        {
+            "cif": "24010776",
+            "nombre": "Durancito Garcia",
+            "facultad": "FIA",
+            "carrera": "Ingenieria en Sistemas",
+            "tipo_beca": "Academica",
+            "correo": "durancito@uamv.edu.ni"
         }
     ]
 }

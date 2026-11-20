@@ -15,6 +15,22 @@
             "fecha_solicitud": "2026-11-19 21:11:04",
             "estado": "Convalidado",
             "observacion": ""
+        },
+        {
+            "id_solicitud": "SOL-C7A85861",
+            "cif": "24010776",
+            "nombre_estudiante": "Durancito Garcia",
+            "facultad": "FIA",
+            "carrera": "Ingenieria en Sistemas",
+            "tipo_beca": "Academica",
+            "correo": "durancito@uamv.edu.ni",
+            "id_actividad": "ACT-D9833213",
+            "nombre_actividad": "Reinado uam",
+            "beneficio_solicitado": "Horas laborales",
+            "horas_solicitadas": 15,
+            "fecha_solicitud": "2026-11-19 21:17:45",
+            "estado": "Pendiente",
+            "observacion": ""
         }
     ]
 }
